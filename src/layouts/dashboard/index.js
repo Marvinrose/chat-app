@@ -7,6 +7,7 @@ import { Nav_Buttons } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import useSettings from "../../hooks/useSettings";
+
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 40,
   height: 20,
@@ -17,7 +18,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
       width: 15,
     },
     "& .MuiSwitch-switchBase.Mui-checked": {
-      transform: "translateX(9px)",
+      transform: "translateX(1px)",
     },
   },
   "& .MuiSwitch-switchBase": {
@@ -114,7 +115,13 @@ const DashboardLayout = () => {
                       setSelected(el.index);
                     }}
                     key={el.index}
-                    sx={{ width: "max-content", color: "#000" }}
+                    sx={{
+                      width: "max-content",
+                      color:
+                        theme.palette.primary.mode === "light"
+                          ? "#000"
+                          : theme.palette.text.primary,
+                    }}
                   >
                     {el.icon}
                   </IconButton>
@@ -138,7 +145,12 @@ const DashboardLayout = () => {
                   onClick={() => {
                     setSelected(3);
                   }}
-                  sx={{ color: "#000" }}
+                  sx={{
+                    color:
+                      theme.palette.primary.mode === "light"
+                        ? "#000"
+                        : theme.palette.text.primary,
+                  }}
                 >
                   <Gear></Gear>
                 </IconButton>

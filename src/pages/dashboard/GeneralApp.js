@@ -1,9 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
+import Chats from "./Chats";
 
 const GeneralApp = () => {
   return (
     <>
-      <Suspense fallback="loading...">Chat App</Suspense>
+      {/* Chats */}
+      <Chats />
     </>
   );
 };
