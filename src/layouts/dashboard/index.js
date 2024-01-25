@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Box, Stack } from "@mui/material";
+import { Box, Divider, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Logo from "../../assets/Images/logo.ico";
+import { Nav_Buttons } from "../../data";
+import { Gear } from "phosphor-react";
 const DashboardLayout = () => {
   const theme = useTheme();
 
@@ -29,6 +31,15 @@ const DashboardLayout = () => {
           >
             <img alt="logo" src={Logo}></img>
           </Box>
+          <Stack spacing={3}>
+            {Nav_Buttons.map((el) => (
+              <IconButton key={el.index}>{el.icon}</IconButton>
+            ))}
+            <Divider />
+            <IconButton>
+              <Gear></Gear>
+            </IconButton>
+          </Stack>
         </Stack>
       </Box>
       <Outlet />
