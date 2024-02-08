@@ -9,7 +9,7 @@ const Chats = () => {
           position: "relative",
           height: "100vh",
           width: 320,
-          backgroundColor: "blueviolet",
+          backgroundColor: "#F8FAFF",
           boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
         }}
       ></Box>
