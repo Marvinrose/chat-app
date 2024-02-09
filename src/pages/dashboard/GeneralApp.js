@@ -1,6 +1,7 @@
 import React from "react";
 import Chats from "./Chats";
 import { Box, Stack } from "@mui/material";
+import Conversation from "../../components/conversation";
 
 const GeneralApp = () => {
   return (
@@ -17,6 +18,7 @@ const GeneralApp = () => {
           }}
         >
           {/* conversation */}
+          <Conversation />
         </Box>
       </Stack>
     </>
