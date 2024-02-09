@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Box, Divider, Grid, IconButton, Stack, Switch } from "@mui/material";
+import { Avatar, Box, Divider, IconButton, Stack, Switch } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons } from "../../data";
@@ -59,7 +59,7 @@ const DashboardLayout = () => {
   console.log(theme);
   return (
     <>
-     <Grid container >
+      <Stack direction="row">
         <Box
           p={2}
           sx={{
@@ -171,7 +171,7 @@ const DashboardLayout = () => {
           </Stack>
         </Box>
         <Outlet />
-      </Grid>
+      </Stack>
     </>
   );
 };
