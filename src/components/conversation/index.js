@@ -49,7 +49,6 @@ const Conversation = () => {
         p={2}
         sx={{
           background: "#F8FAFF",
-          height: 100,
           width: "100%",
           boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
         }}
