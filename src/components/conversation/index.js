@@ -10,13 +10,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { faker } from "@faker-js/faker";
 import {
   CaretDown,
   LinkSimple,
   MagnifyingGlass,
+  PaperPlaneTilt,
   Phone,
+  Smiley,
   VideoCamera,
 } from "phosphor-react";
 
@@ -50,10 +52,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const StyledInput = styled(TextField)(({ theme }) => ({
-  // "& .MuiBadge-badge"
+  "& .MuiInputBase-input": {
+    paddingTop: "12px !important",
+    paddingBottom: "12px !important",
+  },
 }));
 
 const Conversation = () => {
+  const theme = useTheme();
   return (
     <Stack sx={{ height: "100vh", maxHeight: "100vh", width: "auto" }}>
       {/* chat header */}
@@ -122,8 +128,8 @@ const Conversation = () => {
             variant="filled"
             fullWidth
             placeholder="Write a message..."
-            inputProps={{
-              disableUnderline: "true",
+            InputProps={{
+              disableUnderline: true,
               startAdornment: (
                 <InputAdornment>
                   <IconButton>
@@ -131,8 +137,27 @@ const Conversation = () => {
                   </IconButton>
                 </InputAdornment>
               ),
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <Smiley />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
           />
+          <Box
+            sx={{
+              backgroundColor: theme.palette.primary.main,
+              height: 48,
+              width: 48,
+              borderRadius: "1.5px",
+            }}
+          >
+            <IconButton>
+              <PaperPlaneTilt />
+            </IconButton>
+          </Box>
         </Stack>
       </Box>
     </Stack>
