@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { faker } from "@faker-js/faker";
-import { MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
+import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -87,7 +87,10 @@ const Conversation = () => {
             <IconButton>
               <MagnifyingGlass />
             </IconButton>
-            <Divider orientation="vertical" flexItem/>
+            <Divider orientation="vertical" flexItem />
+            <IconButton>
+              <CaretDown />
+            </IconButton>
           </Stack>
         </Stack>
       </Box>
