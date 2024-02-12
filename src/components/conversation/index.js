@@ -120,7 +120,10 @@ const Conversation = () => {
       <Box
         p={2}
         sx={{
-          background: "#F8FAFF",
+          background:
+            theme.palette.mode === "light"
+              ? " #F8FAFF"
+              : theme.palette.background.paper,
           width: "100%",
           boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
         }}
