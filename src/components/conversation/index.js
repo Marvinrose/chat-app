@@ -5,12 +5,20 @@ import {
   Box,
   Divider,
   IconButton,
+  InputAdornment,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { faker } from "@faker-js/faker";
-import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
+import {
+  CaretDown,
+  LinkSimple,
+  MagnifyingGlass,
+  Phone,
+  VideoCamera,
+} from "phosphor-react";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -39,6 +47,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       opacity: 0,
     },
   },
+}));
+
+const StyledInput = styled(TextField)(({ theme }) => ({
+  // "& .MuiBadge-badge"
 }));
 
 const Conversation = () => {
@@ -97,13 +109,32 @@ const Conversation = () => {
       <Box sx={{ flexGrow: 1, width: "100%" }}></Box>
       {/* chat footer */}
       <Box
+        p={2}
         sx={{
           background: "#F8FAFF",
-          height: 100,
+
           width: "100%",
           boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
         }}
-      ></Box>
+      >
+        <Stack alignItems={"center"} direction={"row"} spacing={3}>
+          <StyledInput
+            variant="filled"
+            fullWidth
+            placeholder="Write a message..."
+            inputProps={{
+              disableUnderline: "true",
+              startAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <LinkSimple />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Stack>
+      </Box>
     </Stack>
   );
 };
