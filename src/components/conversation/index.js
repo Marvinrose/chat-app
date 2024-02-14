@@ -1,26 +1,15 @@
 import React from "react";
 import {
-  Avatar,
   Badge,
   Box,
-  Divider,
   IconButton,
   InputAdornment,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
-import { faker } from "@faker-js/faker";
-import {
-  CaretDown,
-  LinkSimple,
-  MagnifyingGlass,
-  PaperPlaneTilt,
-  Phone,
-  Smiley,
-  VideoCamera,
-} from "phosphor-react";
+import { LinkSimple, PaperPlaneTilt, Smiley } from "phosphor-react";
+import Header from "./Header";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -63,57 +52,7 @@ const Conversation = () => {
   return (
     <Stack sx={{ height: "100vh", maxHeight: "100vh", width: "auto" }}>
       {/* chat header */}
-      <Box
-        p={2}
-        sx={{
-          background:
-            theme.palette.mode === "light"
-              ? " #F8FAFF"
-              : theme.palette.background.paper,
-          width: "100%",
-          boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-        }}
-      >
-        <Stack
-          alignItems={"center"}
-          direction={"row"}
-          justifyContent={"space-between"}
-          sx={{ width: "100%", height: "100%" }}
-        >
-          <Stack direction={"row"} spacing={2}>
-            <StyledBadge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              variant="dot"
-            >
-              {" "}
-              <Avatar alt={faker.name.fullName()} src={faker.image.avatar()} />
-            </StyledBadge>
-
-            <Stack spacing={0.2}>
-              <Typography variant="subtitle2">
-                {faker.name.fullName()}
-              </Typography>
-              <Typography variant="caption">Online</Typography>
-            </Stack>
-          </Stack>
-          <Stack direction={"row"} alignItems={"center"} spacing={3}>
-            <IconButton>
-              <VideoCamera />
-            </IconButton>
-            <IconButton>
-              <Phone />
-            </IconButton>
-            <IconButton>
-              <MagnifyingGlass />
-            </IconButton>
-            <Divider orientation="vertical" flexItem />
-            <IconButton>
-              <CaretDown />
-            </IconButton>
-          </Stack>
-        </Stack>
-      </Box>
+      <Header />
       {/* msg */}
       <Box sx={{ flexGrow: 1, width: "100%" }}></Box>
       {/* chat footer */}
