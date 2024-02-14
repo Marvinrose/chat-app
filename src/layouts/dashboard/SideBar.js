@@ -6,6 +6,7 @@ import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import { useTheme } from "@mui/material/styles";
 import useSettings from "../../hooks/useSettings";
+import AntSwitch from "../../components/AntSwitch";
 
 const SideBar = () => {
   const theme = useTheme();
