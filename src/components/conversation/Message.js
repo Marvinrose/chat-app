@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
 import { Chat_History } from "../../data";
-import { Timeline } from "./MsgTypes";
+import { TextMsg, Timeline } from "./MsgTypes";
 
 const Message = () => {
   return (
@@ -30,7 +30,7 @@ const Message = () => {
 
                 default:
                   // text msg
-                  break;
+                  return <TextMsg el={el} />;
               }
               break;
 
