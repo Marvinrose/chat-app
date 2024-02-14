@@ -3,6 +3,7 @@ import React from "react";
 import Header from "./Header";
 import { Box, Stack } from "@mui/material";
 import Footer from "./Footer";
+import Message from "./Message";
 
 const Conversation = () => {
   return (
@@ -10,6 +11,7 @@ const Conversation = () => {
       {/* chat header */}
       <Header />
       {/* msg */}
+      <Message />
       <Box sx={{ flexGrow: 1, width: "100%" }}></Box>
       {/* chat footer */}
       <Footer />
