@@ -11,13 +11,23 @@ const MediaMsg = ({ el }) => {
         sx={{
           backgroundColor: el.incoming
             ? theme.palette.background.default
-            : theme.palette.background.main,
+            : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
         }}
       >
         <Stack spacing={1}>
-          <img src={el.img} alt={el.message} style={{}}></img>
+          <img
+            src={el.img}
+            alt={el.message}
+            style={{ maxHeight: 210, borderRadius: "10px" }}
+          ></img>
+          <Typography
+            variant="body2"
+            color={el.incoming ? theme.palette.text : "#fff"}
+          >
+            {el.message}
+          </Typography>
         </Stack>
       </Box>
     </Stack>
@@ -33,7 +43,7 @@ const TextMsg = ({ el }) => {
         sx={{
           backgroundColor: el.incoming
             ? theme.palette.background.default
-            : theme.palette.background.main,
+            : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
         }}
