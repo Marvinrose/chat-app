@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { Avatar, Box, Divider, IconButton, Stack } from "@mui/material";
+import Logo from "../../assets/Images/logo.ico";
+import { Nav_Buttons } from "../../data";
+import { Gear } from "phosphor-react";
+import { faker } from "@faker-js/faker";
+import { useTheme } from "@mui/material/styles";
+import useSettings from "../../hooks/useSettings";
 
 const SideBar = () => {
+  const theme = useTheme();
+  const { onToggleMode } = useSettings();
+  const [selected, setSelected] = useState(0);
   return (
     <Box
       p={2}

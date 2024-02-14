@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { Avatar, Box, Divider, IconButton, Stack, Switch } from "@mui/material";
+import React from "react";
+import { Stack, Switch } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
-import Logo from "../../assets/Images/logo.ico";
-import { Nav_Buttons } from "../../data";
-import { Gear } from "phosphor-react";
-import { faker } from "@faker-js/faker";
+
 import { Outlet } from "react-router-dom";
-import useSettings from "../../hooks/useSettings";
+
 import SideBar from "./SideBar";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -55,8 +52,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 const DashboardLayout = () => {
   const theme = useTheme();
-  const { onToggleMode } = useSettings();
-  const [selected, setSelected] = useState(0);
+
   console.log(theme);
   return (
     <>
