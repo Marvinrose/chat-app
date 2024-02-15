@@ -1,7 +1,15 @@
-import { Box, Stack } from "@mui/material";
 import React from "react";
+import { Box, Stack } from "@mui/material";
+
 import { Chat_History } from "../../data";
-import { LinkMsg, MediaMsg, ReplyMsg, TextMsg, Timeline } from "./MsgTypes";
+import {
+  DocMsg,
+  LinkMsg,
+  MediaMsg,
+  ReplyMsg,
+  TextMsg,
+  Timeline,
+} from "./MsgTypes";
 
 const Message = () => {
   return (
@@ -21,7 +29,8 @@ const Message = () => {
 
                 case "doc":
                   // doc msg
-                  break;
+                  return <DocMsg el={el} />;
+
                 case "link":
                   // link msg
                   return <LinkMsg el={el} />;
@@ -34,7 +43,6 @@ const Message = () => {
                   // text msg
                   return <TextMsg el={el} />;
               }
-              break;
 
             default:
               <></>;

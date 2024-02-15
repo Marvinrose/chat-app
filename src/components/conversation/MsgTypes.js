@@ -1,6 +1,14 @@
 import React from "react";
-import { Box, Divider, Link, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { DownloadSimple, Image } from "phosphor-react";
 
 const DocMsg = ({ el }) => {
   const theme = useTheme();
@@ -15,7 +23,32 @@ const DocMsg = ({ el }) => {
           borderRadius: 1.5,
           width: "max-content",
         }}
-      ></Box>
+      >
+        <Stack spacing={2}>
+          <Stack
+            direction={"row"}
+            spacing={3}
+            p={2}
+            alignItems={"center"}
+            sx={{
+              borderRadius: 1,
+              backgroundColor: theme.palette.background.paper,
+            }}
+          >
+            <Image size={48} />
+            <Typography variant="caption">Abstract.png</Typography>
+            <IconButton>
+              <DownloadSimple />
+            </IconButton>
+          </Stack>
+          <Typography
+            variant="body2"
+            color={el.incoming ? theme.palette.text : "#fff"}
+          >
+            {el.message}
+          </Typography>
+        </Stack>
+      </Box>
     </Stack>
   );
 };
