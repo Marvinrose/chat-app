@@ -1,8 +1,13 @@
 import React from "react";
-import { Box, IconButton, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { LinkSimple, PaperPlaneTilt, Smiley } from "phosphor-react";
 import { styled, useTheme } from "@mui/material/styles";
-
 
 const StyledInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -11,6 +16,32 @@ const StyledInput = styled(TextField)(({ theme }) => ({
   },
 }));
 
+const ChatInput = () => {
+  return (
+    <StyledInput
+      variant="filled"
+      fullWidth
+      placeholder="Write a message..."
+      InputProps={{
+        disableUnderline: true,
+        startAdornment: (
+          <InputAdornment>
+            <IconButton>
+              <LinkSimple />
+            </IconButton>
+          </InputAdornment>
+        ),
+        endAdornment: (
+          <InputAdornment>
+            <IconButton>
+              <Smiley />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
+};
 
 const Footer = () => {
   const theme = useTheme();
@@ -27,28 +58,8 @@ const Footer = () => {
       }}
     >
       <Stack alignItems={"center"} direction={"row"} spacing={3}>
-        <StyledInput
-          variant="filled"
-          fullWidth
-          placeholder="Write a message..."
-          InputProps={{
-            disableUnderline: true,
-            startAdornment: (
-              <InputAdornment>
-                <IconButton>
-                  <LinkSimple />
-                </IconButton>
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment>
-                <IconButton>
-                  <Smiley />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+        {/* Chat Input */}
+        <ChatInput />
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
