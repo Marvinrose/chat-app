@@ -7,12 +7,18 @@ import Message from "./Message";
 
 const Conversation = () => {
   return (
-    <Stack sx={{ height: "100vh", maxHeight: "100vh", width: "auto" }}>
+    <Stack sx={{ height: "100%", maxHeight: "100vh", width: "auto" }}>
       {/* chat header */}
       <Header />
       {/* msg */}
-      <Message />
-      <Box sx={{ flexGrow: 1, width: "100%" }}></Box>
+
+      <Box
+        width={"100%"}
+        sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}
+      >
+        {" "}
+        <Message />
+      </Box>
       {/* chat footer */}
       <Footer />
     </Stack>

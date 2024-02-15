@@ -42,7 +42,12 @@ const LinkMsg = ({ el }) => {
                 www.rozzeymarvin.com
               </Typography>
             </Stack>
-            <Typography></Typography>
+            <Typography
+              variant="body2"
+              color={el.incoming ? theme.palette.text : "#fff"}
+            >
+              {el.message}
+            </Typography>
           </Stack>
         </Stack>
       </Box>
