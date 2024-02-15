@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   IconButton,
@@ -18,7 +18,7 @@ const StyledInput = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const ChatInput = () => {
+const ChatInput = ({ setOpenPicker }) => {
   return (
     <StyledInput
       variant="filled"
@@ -35,7 +35,11 @@ const ChatInput = () => {
         ),
         endAdornment: (
           <InputAdornment>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenPicker((prev) => !prev);
+              }}
+            >
               <Smiley />
             </IconButton>
           </InputAdornment>
@@ -47,6 +51,7 @@ const ChatInput = () => {
 
 const Footer = () => {
   const theme = useTheme();
+  const [openPicker, setOpenPicker] = useState(false);
   return (
     <Box
       p={2}
@@ -60,9 +65,17 @@ const Footer = () => {
       }}
     >
       <Stack alignItems={"center"} direction={"row"} spacing={3}>
-        <Stack>
+        <Stack sx={{ width: "100%" }}>
           {/* Chat Input */}
-          <Box sx={{position: "fixed"}}>
+          <Box
+            sx={{
+              display: openPicker ? "inline" : "none",
+              position: "fixed",
+              zIndex: 10,
+              bottom: 81,
+              right: 100,
+            }}
+          >
             <Picker
               theme={theme.palette.mode}
               data={data}
@@ -70,7 +83,7 @@ const Footer = () => {
             />
           </Box>
 
-          <ChatInput />
+          <ChatInput setOpenPicker={setOpenPicker} />
         </Stack>
 
         <Box
