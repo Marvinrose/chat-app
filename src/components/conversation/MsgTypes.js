@@ -2,6 +2,24 @@ import React from "react";
 import { Box, Divider, Link, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
+const DocMsg = ({ el }) => {
+  const theme = useTheme();
+  return (
+    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
+      <Box
+        p={1.5}
+        sx={{
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
+          borderRadius: 1.5,
+          width: "max-content",
+        }}
+      ></Box>
+    </Stack>
+  );
+};
+
 const LinkMsg = ({ el }) => {
   const theme = useTheme();
   return (
@@ -170,4 +188,4 @@ const Timeline = ({ el }) => {
   );
 };
 
-export { Timeline, TextMsg, MediaMsg, ReplyMsg, LinkMsg };
+export { Timeline, TextMsg, MediaMsg, ReplyMsg, LinkMsg, DocMsg };
