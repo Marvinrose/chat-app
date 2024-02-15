@@ -63,6 +63,7 @@ const StyledInput = styled(TextField)(({ theme }) => ({
 }));
 
 const ChatInput = ({ setOpenPicker }) => {
+  const [openActions, setOpenActions] = useState(false);
   return (
     <StyledInput
       variant="filled"
@@ -72,9 +73,14 @@ const ChatInput = ({ setOpenPicker }) => {
         disableUnderline: true,
         startAdornment: (
           <Stack sx={{ width: "max-content" }}>
-            <Stack sx={{ position: "relative" }}>
+            <Stack
+              sx={{
+                position: "relative",
+                display: openActions ? "inline-block" : "none",
+              }}
+            >
               {Actions.map((el) => (
-                <Tooltip  title={el.title} placement="right" >
+                <Tooltip title={el.title} placement="right">
                   <Fab
                     sx={{
                       position: "absolute",
@@ -88,7 +94,11 @@ const ChatInput = ({ setOpenPicker }) => {
               ))}
             </Stack>
             <InputAdornment>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenActions((prev) => !prev);
+                }}
+              >
                 <LinkSimple />
               </IconButton>
             </InputAdornment>
