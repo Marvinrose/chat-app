@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Link, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 const LinkMsg = ({ el }) => {
@@ -15,7 +15,37 @@ const LinkMsg = ({ el }) => {
           borderRadius: 1.5,
           width: "max-content",
         }}
-      ></Box>
+      >
+        <Stack spacing={2}>
+          <Stack
+            p={2}
+            spacing={3}
+            alignItems={"center"}
+            sx={{
+              backgroundColor: theme.palette.background.paper,
+              borderRadius: 1,
+            }}
+          >
+            <img
+              src={el.preview}
+              alt={el.message}
+              style={{ borderRadius: "10px", maxHeight: 210 }}
+            />
+            <Stack spacing={2}>
+              <Typography variant="subtitle2">Creating Chat App</Typography>
+              <Typography
+                variant="subtitle2"
+                component={Link}
+                to="//https://www.youtube.com"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                www.rozzeymarvin.com
+              </Typography>
+            </Stack>
+            <Typography></Typography>
+          </Stack>
+        </Stack>
+      </Box>
     </Stack>
   );
 };
