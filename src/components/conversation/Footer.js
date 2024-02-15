@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { LinkSimple, PaperPlaneTilt, Smiley } from "phosphor-react";
 import { styled, useTheme } from "@mui/material/styles";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 const StyledInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -58,8 +60,19 @@ const Footer = () => {
       }}
     >
       <Stack alignItems={"center"} direction={"row"} spacing={3}>
-        {/* Chat Input */}
-        <ChatInput />
+        <Stack>
+          {/* Chat Input */}
+          <Box sx={{position: "fixed"}}>
+            <Picker
+              theme={theme.palette.mode}
+              data={data}
+              onEmojiSelect={console.log}
+            />
+          </Box>
+
+          <ChatInput />
+        </Stack>
+
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
