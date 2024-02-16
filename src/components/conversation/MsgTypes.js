@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 
 const DocMsg = ({ el }) => {
   const theme = useTheme();
@@ -200,6 +200,8 @@ const TextMsg = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
+
+      <DotsThreeVertical size={20} />
     </Stack>
   );
 };
