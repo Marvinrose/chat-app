@@ -151,6 +151,14 @@ const SideBar = () => {
             MenuListProps={{
               "aria-labelledby": "basic-button",
             }}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
           >
             <Stack px={1} spacing={1}>
               {Profile_Menu.map((el) => (
