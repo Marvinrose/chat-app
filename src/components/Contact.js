@@ -1,11 +1,10 @@
-import React from 'react'
+import { Box } from "@mui/material";
+import React from "react";
 
 const Contact = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <Box sx={{ width: "320px" }}>
+    
+  </Box>;
+};
 
-export default Contact
+export default Contact;
