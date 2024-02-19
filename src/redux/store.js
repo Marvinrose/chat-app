@@ -4,9 +4,10 @@ import {
   useSelector as useAppSelector,
 } from "react-redux";
 import { persistStore, persistReducer } from "redux-persist";
+import { rootPersistConfig, rootReducer } from "./rootReducer";
 
 const store = configureStore({
-  reducer: persistReducer(),
+  reducer: persistReducer(rootPersistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

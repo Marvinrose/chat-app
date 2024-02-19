@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-
+import appReducer from "./slices/app";
 import storage from "redux-persist/lib/storage";
 
 // Slices
