@@ -9,10 +9,20 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { CaretRight, Phone, VideoCamera, X } from "phosphor-react";
+import {
+  Bell,
+  CaretRight,
+  Phone,
+  Prohibit,
+  Star,
+  Trash,
+  VideoCamera,
+  X,
+} from "phosphor-react";
 import { ToggleSidebar } from "../redux/slices/app";
 import { useDispatch } from "../redux/store";
 import { faker } from "@faker-js/faker";
+import AntSwitch from "./AntSwitch";
 
 const Contact = () => {
   const theme = useTheme();
@@ -116,6 +126,51 @@ const Contact = () => {
             ))}
           </Stack>
           <Divider />
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Star size={20} />
+              <Typography variant="subtitle2">Starred Messages</Typography>
+            </Stack>
+            <IconButton>
+              <CaretRight />
+            </IconButton>
+          </Stack>
+          <Divider />
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Bell size={20} />
+              <Typography variant="subtitle2">Mute Notifications</Typography>
+            </Stack>
+
+            <AntSwitch />
+          </Stack>
+          <Divider />
+          <Typography variant="subtitle2">1 group in common</Typography>
+          <Stack spacing={2} direction="row" alignItems="center">
+            <Avatar src={faker.image.avatar()} alt={faker.name.firstName()} />
+            <Stack spacing={0.5}>
+              <Typography variant="subtitle2">Nerdy Techie</Typography>
+              <Typography variant="caption">
+                Owl, Parrot, Rabbit, You
+              </Typography>
+            </Stack>
+          </Stack>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <Button fullWidth variant="outlined" startIcon={<Prohibit />}>
+              Block
+            </Button>
+            <Button fullWidth variant="outlined" startIcon={<Trash />}>
+              Delete
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
     </Box>
