@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { X } from "phosphor-react";
+import { Phone, VideoCamera, X } from "phosphor-react";
 import { ToggleSidebar } from "../redux/slices/app";
 import { useDispatch } from "../redux/store";
+import { faker } from "@faker-js/faker";
 
 const Contact = () => {
   const theme = useTheme();
@@ -40,6 +41,50 @@ const Contact = () => {
           </Stack>
         </Box>
         {/* Body */}
+        <Stack
+          sx={{
+            height: "100%",
+            position: "relative",
+            flexGrow: 1,
+            overflowY: "scroll",
+          }}
+          p={3}
+          spacing={3}
+        >
+          <Stack alignItems="center" direction="row" spacing={2}>
+            <Avatar
+              src={faker.image.avatar()}
+              alt={faker.name.firstName()}
+              sx={{ height: 64, width: 64 }}
+            />
+            <Stack spacing={0.5}>
+              <Typography variant="article" fontWeight={600}>
+                {faker.name.fullName()}
+              </Typography>
+              <Typography variant="body2" fontWeight={500}>
+                {"+234 812 715 9034"}
+              </Typography>
+            </Stack>
+          </Stack>
+          <Stack
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+          >
+            <Stack spacing={1} alignItems="center">
+              <IconButton>
+                <Phone />
+              </IconButton>
+              <Typography variant="overline">Voice</Typography>
+            </Stack>
+            <Stack spacing={1} alignItems="center">
+              <IconButton>
+                <VideoCamera />
+              </IconButton>
+              <Typography variant="overline">Video</Typography>
+            </Stack>
+          </Stack>
+        </Stack>
       </Stack>
     </Box>
   );
