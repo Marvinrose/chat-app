@@ -4,12 +4,13 @@ import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Conversation from "../../components/conversation";
 import Contact from "../../components/Contact";
-import { useSelector } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const GeneralApp = () => {
   const theme = useTheme();
-  const { sidebar } = useSelector((store) => store.app);
 
+  const { sidebar } = useSelector((store) => store.app);
+  console.log(sidebar, "sidebarrr");
   return (
     <>
       <Stack direction={"row"}>
@@ -30,7 +31,8 @@ const GeneralApp = () => {
           <Conversation />
         </Box>
         {/* Contacts */}
-        {sidebar.open && <Contact />}
+        <Contact />
+        {/* {sidebar.open && <Contact />} */}
       </Stack>
     </>
   );

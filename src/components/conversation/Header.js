@@ -11,7 +11,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
 import StyledBadge from "../StyledBadge";
-import { ToggleSideBar } from "../../redux/slices/app";
+import { ToggleSidebar } from "../../redux/slices/app";
 import { useDispatch } from "react-redux";
 
 const Header = () => {
@@ -37,7 +37,7 @@ const Header = () => {
       >
         <Stack
           onClick={() => {
-            dispatch(ToggleSideBar());
+            dispatch(ToggleSidebar());
           }}
           direction={"row"}
           spacing={2}
