@@ -1,7 +1,15 @@
 import React from "react";
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Phone, VideoCamera, X } from "phosphor-react";
+import { CaretRight, Phone, VideoCamera, X } from "phosphor-react";
 import { ToggleSidebar } from "../redux/slices/app";
 import { useDispatch } from "../redux/store";
 import { faker } from "@faker-js/faker";
@@ -84,6 +92,30 @@ const Contact = () => {
               <Typography variant="overline">Video</Typography>
             </Stack>
           </Stack>
+          <Divider />
+          <Stack spacing={0.5}>
+            <Typography variant="article">About</Typography>
+            <Typography variant="body2">
+              Imagination is the only limit
+            </Typography>
+          </Stack>
+          <Divider />
+          <Stack
+            alignItems="center"
+            direction="row"
+            justifyContent="space-between"
+          >
+            <Typography variant="subtitle2">Media, Links & Docs</Typography>
+            <Button endIcon={<CaretRight />}>401</Button>
+          </Stack>
+          <Stack direction="row" spacing={2} alignItems="center">
+            {[1, 2, 3].map((el) => (
+              <Box>
+                <img src={faker.image.food()} alt={faker.name.fullName()} />
+              </Box>
+            ))}
+          </Stack>
+          <Divider />
         </Stack>
       </Stack>
     </Box>
