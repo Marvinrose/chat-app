@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { CaretLeft } from "phosphor-react";
+import ResetPasswordForm from "../../sections/auth/ResetPasswordForm";
 
 const ResetPassword = () => {
   return (
@@ -13,7 +15,17 @@ const ResetPassword = () => {
         email you a link to reset your password.
       </Typography>
       {/* Reset password form */}
-      <Link component={RouterLink} to={""}></Link>
+      <ResetPasswordForm />
+      <Link
+        component={RouterLink}
+        to={"/auth/login"}
+        color={"inherit"}
+        variant="subtitle2"
+        sx={{ mt: 3, mx: "auto", alignItems: "center" }}
+      >
+        <CaretLeft />
+        Return to sign in
+      </Link>
     </Stack>
   );
 };
