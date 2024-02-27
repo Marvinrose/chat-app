@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Divider,
@@ -18,9 +18,16 @@ import { SimpleBarStyle } from "../../components/Scrollbar";
 import ChatElement from "../../components/ChatElement";
 import { ChatList } from "../../data";
 import Conversation from "../../components/conversation";
+import CreateGroup from "../../sections/main/CreateGroup";
 
 const Group = () => {
   const theme = useTheme();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <>
       <Stack direction={"row"} sx={{ width: "100%" }}>
@@ -59,7 +66,11 @@ const Group = () => {
               <Typography component={Link} variant="subtitle2">
                 Create New Group
               </Typography>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
                 <Plus style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
@@ -94,6 +105,10 @@ const Group = () => {
         {/* right */}
         {/* Reuse conversation component */}
         <Conversation />
+
+        {openDialog && (
+          <CreateGroup open={openDialog} handleClose={handleCloseDialog} />
+        )}
       </Stack>
     </>
   );
