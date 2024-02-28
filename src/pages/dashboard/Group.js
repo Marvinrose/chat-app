@@ -17,7 +17,7 @@ import {
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import ChatElement from "../../components/ChatElement";
 import { ChatList } from "../../data";
-import Conversation from "../../components/conversation";
+
 import CreateGroup from "../../sections/main/CreateGroup";
 
 const Group = () => {
@@ -104,7 +104,7 @@ const Group = () => {
 
         {/* right */}
         {/* Reuse conversation component */}
-        <Conversation />
+        {/* <Conversation /> */}
 
         {openDialog && (
           <CreateGroup open={openDialog} handleClose={handleCloseDialog} />
