@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Divider,
@@ -8,26 +8,18 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { MagnifyingGlass, Plus } from "phosphor-react";
+import { SimpleBarStyle } from "../../components/Scrollbar";
+import { MagnifyingGlass, PhoneCall, Plus } from "phosphor-react";
 import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
 } from "../../components/Search";
-import { SimpleBarStyle } from "../../components/Scrollbar";
-import ChatElement from "../../components/ChatElement";
-import { ChatList } from "../../data";
+import { CallLogElements } from "../../components/CallElements";
+import { CallLogs } from "../../data";
 
-import CreateGroup from "../../sections/main/CreateGroup";
-
-const Group = () => {
+const Call = () => {
   const theme = useTheme();
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
   return (
     <>
       <Stack direction={"row"} sx={{ width: "100%" }}>
@@ -45,7 +37,7 @@ const Group = () => {
         >
           <Stack p={3} spacing={2} sx={{ maxHeight: "100vh" }}>
             <Stack>
-              <Typography variant="h5">Groups</Typography>
+              <Typography variant="h5">Call Logs</Typography>
             </Stack>
             <Stack sx={{ width: "100%" }}>
               <Search>
@@ -64,14 +56,14 @@ const Group = () => {
               alignItems={"center"}
             >
               <Typography component={Link} variant="subtitle2">
-                Create New Group
+                Start Conversation
               </Typography>
               <IconButton
-                onClick={() => {
-                  setOpenDialog(true);
-                }}
+              // onClick={() => {
+              //   setOpenDialog(true);
+              // }}
               >
-                <Plus style={{ color: theme.palette.primary.main }} />
+                <PhoneCall style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
             <Divider />
@@ -82,36 +74,19 @@ const Group = () => {
             >
               <SimpleBarStyle timeout={500} clickOnTrack={false}>
                 <Stack spacing={2.5}>
-                  <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-                    Pinned
-                  </Typography>
-                  {/* Chat List */}
-                  {ChatList.filter((el) => el.pinned).map((el) => {
-                    return <ChatElement {...el} />;
-                  })}
-                  <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-                    All Groups
-                  </Typography>
-                  {/*Chat list */}
-                  {ChatList.filter((el) => !el.pinned).map((el) => {
-                    return <ChatElement {...el} />;
-                  })}
+                  {/* Call logs */}
+                  {CallLogs.map((el) => (
+                    <CallLogElements {...el} />
+                  ))}
+                  <CallLogElements />
                 </Stack>
               </SimpleBarStyle>
             </Stack>
           </Stack>
         </Box>
-
-        {/* right */}
-        {/* Reuse conversation component */}
-        {/* <Conversation /> */}
-
-        {openDialog && (
-          <CreateGroup open={openDialog} handleClose={handleCloseDialog} />
-        )}
       </Stack>
     </>
   );
 };
 
-export default Group;
+export default Call;

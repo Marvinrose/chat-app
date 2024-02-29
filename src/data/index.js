@@ -46,6 +46,54 @@ const Nav_Setting = [
   },
 ];
 
+const CallLogs = [
+  {
+    id: 0,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    incoming: true,
+    missed: false,
+    time: "1:36",
+    day: "Yesterday",
+  },
+  {
+    id: 1,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    incoming: false,
+    missed: true,
+    time: "1:36",
+    day: "Yesterday",
+  },
+  {
+    id: 2,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    incoming: false,
+    missed: false,
+    time: "1:36",
+    day: "Yesterday",
+  },
+  {
+    id: 3,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    incoming: true,
+    missed: false,
+    time: "1:36",
+    day: "Yesterday",
+  },
+  {
+    id: 4,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    incoming: false,
+    missed: true,
+    time: "1:36",
+    day: "Yesterday",
+  },
+];
+
 const ChatList = [
   {
     id: 0,
@@ -304,6 +352,7 @@ export {
   Profile_Menu,
   Nav_Setting,
   Nav_Buttons,
+  CallLogs,
   ChatList,
   Chat_History,
   Message_options,
