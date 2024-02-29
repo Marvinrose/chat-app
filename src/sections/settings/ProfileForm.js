@@ -3,18 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import FormProvider from "../../components/hook-form/FormProvider";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Alert,
-  Button,
-  IconButton,
-  InputAdornment,
-  Link,
-  Stack,
-} from "@mui/material";
+
+import { Alert, Button, Stack } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form/index";
-import { Eye, EyeSlash } from "phosphor-react";
-import { object } from "prop-types";
 
 const ProfileForm = () => {
   const ProfileSchema = Yup.object().shape({

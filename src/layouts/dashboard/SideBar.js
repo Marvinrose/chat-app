@@ -13,11 +13,13 @@ import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
 
 const SideBar = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const { onToggleMode } = useSettings();
   const [selected, setSelected] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -28,6 +30,38 @@ const SideBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const getPath = (index) => {
+    switch (index) {
+      case 0:
+        return "/app";
+      case 1:
+        return "/group";
+      case 2:
+        return "/call";
+      case 3:
+        return "/settings";
+
+      default:
+        break;
+    }
+  };
+
+  const getMenuPath = (idx) => {
+    switch (idx) {
+      case 0:
+        return "/profile";
+      case 1:
+        return "/settings";
+      case 2:
+        // TODO => Update users token and set isAuthenticated to false
+        return "/auth/login";
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Box
       p={2}
@@ -83,6 +117,7 @@ const SideBar = () => {
                 <IconButton
                   onClick={() => {
                     setSelected(el.index);
+                    navigate(getPath(el.index));
                   }}
                   key={el.index}
                   sx={{
@@ -114,6 +149,7 @@ const SideBar = () => {
               <IconButton
                 onClick={() => {
                   setSelected(3);
+                  navigate(getPath(3));
                 }}
                 sx={{
                   color:
@@ -161,9 +197,16 @@ const SideBar = () => {
             }}
           >
             <Stack px={1} spacing={1}>
-              {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
+              {Profile_Menu.map((el, idx) => (
+                <MenuItem
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
                   <Stack
+                    onClick={() => {
+                      navigate(getMenuPath(idx));
+                    }}
                     direction={"row"}
                     alignItems={"center"}
                     justifyContent={"space-between"}
