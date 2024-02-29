@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Avatar,
-  Badge,
-  Box,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import { faker } from "@faker-js/faker";
 import StyledBadge from "./StyledBadge";
 import {

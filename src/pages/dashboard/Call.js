@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { SimpleBarStyle } from "../../components/Scrollbar";
-import { MagnifyingGlass, PhoneCall } from "phosphor-react";
+import { MagnifyingGlass, Plus } from "phosphor-react";
 import {
   Search,
   SearchIconWrapper,
@@ -69,7 +69,7 @@ const Call = () => {
                   setOpenDialog(true);
                 }}
               >
-                <PhoneCall style={{ color: theme.palette.primary.main }} />
+                <Plus style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
             <Divider />
