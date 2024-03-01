@@ -93,6 +93,7 @@ const Settings = () => {
         <Box
           sx={{
             width: 320,
+            height: "100vh",
             backgroundColor:
               theme.palette.mode === "light"
                 ? " #F8FAFF"
