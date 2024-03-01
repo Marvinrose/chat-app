@@ -41,6 +41,7 @@ const Header = () => {
           }}
           direction={"row"}
           spacing={2}
+          sx={{ cursor: "pointer" }}
         >
           <Box>
             <StyledBadge

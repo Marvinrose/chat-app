@@ -172,6 +172,7 @@ const SideBar = () => {
             defaultChecked
           />
           <Avatar
+            sx={{ cursor: "pointer" }}
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"

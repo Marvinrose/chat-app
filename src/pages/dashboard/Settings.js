@@ -92,8 +92,6 @@ const Settings = () => {
         {/* left panel */}
         <Box
           sx={{
-            overflowY: "scroll",
-            height: "100vw",
             width: 320,
             backgroundColor:
               theme.palette.mode === "light"
@@ -133,7 +131,7 @@ const Settings = () => {
             </Stack>
 
             {/* list of options */}
-            <Stack spacing={4}>
+            <Stack spacing={4} direction={"column"}>
               {List.map(({ key, icon, title, onclick }) => (
                 <>
                   <Stack
