@@ -15,8 +15,11 @@ import {
 } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form/index";
 import { Eye, EyeSlash } from "phosphor-react";
+import { LoginUser } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -40,14 +43,16 @@ const LoginForm = () => {
     reset,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
   const onSubmit = async (data) => {
     try {
+      console.log(data);
       // submit data to backend
+      dispatch(LoginUser(data));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       reset();
       setError("afterSubmit", {
         ...error,
@@ -72,9 +77,8 @@ const LoginForm = () => {
             endAdornment: (
               <InputAdornment>
                 <IconButton
-                  onClick={() => {
-                    setShowPassword(!setShowPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
                 >
                   {showPassword ? <Eye /> : <EyeSlash />}
                 </IconButton>

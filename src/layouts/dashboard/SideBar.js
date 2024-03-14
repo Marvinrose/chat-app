@@ -16,8 +16,11 @@ import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
+import { logoutUser } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 const SideBar = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const navigate = useNavigate();
   const { onToggleMode } = useSettings();
@@ -206,7 +209,12 @@ const SideBar = () => {
                 >
                   <Stack
                     onClick={() => {
-                      navigate(getMenuPath(idx));
+                      // If idx is 2 then dispatch logout
+                      if (idx === 2) {
+                        dispatch(logoutUser());
+                      } else {
+                        navigate(getMenuPath(idx));
+                      }
                     }}
                     direction={"row"}
                     alignItems={"center"}
