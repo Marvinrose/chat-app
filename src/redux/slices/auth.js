@@ -47,7 +47,6 @@ export function LoginUser(formValues) {
         }
       )
       .then(function (response) {
-        console.log("Login request successful. Response:", response); // Log server response
         console.log(response);
 
         dispatch(
@@ -58,7 +57,6 @@ export function LoginUser(formValues) {
         );
       })
       .catch(function (error) {
-        console.error("Login request failed. Error:", error); // Log any errors
         console.log(error);
       });
   };
@@ -69,5 +67,55 @@ export function LoginUser(formValues) {
 export function logoutUser() {
   return async (dispatch, getState) => {
     dispatch(slice.actions.signOut());
+  };
+}
+
+// Forgot password
+
+export function ForgotPassword(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .post(
+        "/auth/forgot-password",
+        {
+          ...formValues,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+// Reset password
+
+export function NewPassword(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .post(
+        "/auth/reset-password",
+        {
+          ...formValues,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 }
