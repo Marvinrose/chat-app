@@ -12,8 +12,11 @@ import {
 } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
 import { Eye, EyeSlash } from "phosphor-react";
+import { Register } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
@@ -47,6 +50,7 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to backend
+      dispatch(Register(data));
     } catch (error) {
       console.log(error);
       reset();
@@ -76,9 +80,8 @@ const RegisterForm = () => {
             endAdornment: (
               <InputAdornment>
                 <IconButton
-                  onClick={() => {
-                    setShowPassword(!setShowPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
                 >
                   {showPassword ? <Eye /> : <EyeSlash />}
                 </IconButton>

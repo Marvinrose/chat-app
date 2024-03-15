@@ -15,9 +15,11 @@ import { RHFTextField } from "../../components/hook-form/index";
 import { Eye, EyeSlash } from "phosphor-react";
 import { useDispatch } from "react-redux";
 import { NewPassword } from "../../redux/slices/auth";
+import { useSearchParams } from "react-router-dom";
 
 const NewPasswordForm = () => {
   const dispatch = useDispatch();
+  const [queryParameters] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
 
   const NewPasswordSchema = Yup.object().shape({
@@ -49,7 +51,7 @@ const NewPasswordForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to backend
-      dispatch(NewPassword(data));
+      dispatch(NewPassword({ ...data, token: queryParameters.get("token") }));
     } catch (error) {
       console.log(error);
       reset();
@@ -67,16 +69,15 @@ const NewPasswordForm = () => {
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
         )}
         <RHFTextField
-          name="newPassword"
+          name="password"
           label="New Password"
           type={showPassword ? "text" : "password"}
           InputProps={{
             endAdornment: (
               <InputAdornment>
                 <IconButton
-                  onClick={() => {
-                    setShowPassword(!setShowPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
                 >
                   {showPassword ? <Eye /> : <EyeSlash />}
                 </IconButton>
@@ -92,9 +93,8 @@ const NewPasswordForm = () => {
             endAdornment: (
               <InputAdornment>
                 <IconButton
-                  onClick={() => {
-                    setShowPassword(!setShowPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
                 >
                   {showPassword ? <Eye /> : <EyeSlash />}
                 </IconButton>
