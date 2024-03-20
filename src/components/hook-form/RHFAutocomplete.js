@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 // form
-
 import { useFormContext, Controller } from "react-hook-form";
-
-// miu
-
+// @mui
 import { Autocomplete, TextField } from "@mui/material";
+
+// ----------------------------------------------------------------------
 
 RHFAutocomplete.propTypes = {
   name: PropTypes.string,
@@ -15,37 +14,28 @@ RHFAutocomplete.propTypes = {
 
 export default function RHFAutocomplete({ name, label, helperText, ...other }) {
   const { control, setValue } = useFormContext();
+
   return (
-    <>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field, fieldState: { error } }) => (
-          <Autocomplete
-            {...field}
-            fullWidth
-            error={!!error}
-            value={
-              typeof field.value === "number" && field.value === 0
-                ? ""
-                : field.value
-            }
-            onChange={(event, newValue) =>
-              setValue(name, newValue, { shouldValidate: true })
-            }
-            helperText={error ? error.message : helperText}
-            {...other}
-            renderInput={(params) => {
-              <TextField
-                label={label}
-                error={!!error}
-                helperText={error ? error.message : helperText}
-                {...params}
-              />;
-            }}
-          />
-        )}
-      />
-    </>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field, fieldState: { error } }) => (
+        <Autocomplete
+          {...field}
+          onChange={(event, newValue) =>
+            setValue(name, newValue, { shouldValidate: true })
+          }
+          renderInput={(params) => (
+            <TextField
+              label={label}
+              error={!!error}
+              helperText={error ? error?.message : helperText}
+              {...params}
+            />
+          )}
+          {...other}
+        />
+      )}
+    />
   );
 }
