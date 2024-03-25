@@ -208,6 +208,9 @@ export function VerifyEmail(formValues) {
       .then(function (response) {
         console.log(response);
         dispatch(slice.actions.updateRegisterEmail({ email: "" }));
+        dispatch(
+          showSnackbar({ severity: "success", message: response.data.message })
+        );
         window.localStorage.setItem("user_id", response.data.user_id);
         dispatch(
           slice.actions.logIn({
@@ -226,6 +229,7 @@ export function VerifyEmail(formValues) {
         dispatch(
           slice.actions.updateIsLoading({ error: true, isLoading: false })
         );
+        dispatch(showSnackbar({ severity: "error", message: error.message }));
       });
   };
 }

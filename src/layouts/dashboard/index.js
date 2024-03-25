@@ -24,7 +24,9 @@ const DashboardLayout = () => {
         }
       };
 
-      window.reload();
+      
+
+      window.onload();
 
       if (!socket) {
         connectSocket(user_id);
