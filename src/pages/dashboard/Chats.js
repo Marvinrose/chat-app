@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,8 +14,6 @@ import {
   Users,
 } from "phosphor-react";
 import { useTheme } from "@mui/material/styles";
-import React, { useState } from "react";
-import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import {
   Search,
@@ -23,6 +22,8 @@ import {
 } from "../../components/Search";
 import ChatElement from "../../components/ChatElement";
 import Friends from "../../sections/main/Friends";
+import { socket } from "../../socket";
+import { useSelector } from "react-redux";
 
 // const StyledBadge = styled(Badge)(({ theme }) => ({
 //   "& .MuiBadge-badge": {
@@ -56,6 +57,18 @@ import Friends from "../../sections/main/Friends";
 const Chats = () => {
   const theme = useTheme();
   const [openDialog, setOpenDialog] = useState(false);
+
+  const user_id = window.localStorage.getItem("user_id");
+
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
+
+  useEffect(() => {
+    socket.emit("get_direct_conversations", { user_id }, (data) => {
+      //  data => list of conversations
+    });
+  }, []);
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -124,18 +137,20 @@ const Chats = () => {
             >
               <SimpleBarStyle timeout={500} clickOnTrack={false}>
                 <Stack spacing={2.4}>
-                  <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+                  {/* <Typography variant="subtitle2" sx={{ color: "#676667" }}>
                     Pinned
                   </Typography>
                   {ChatList.filter((el) => el.pinned).map((el) => {
                     return <ChatElement {...el} />;
-                  })}
+                  })} */}
                   <Typography variant="subtitle2" sx={{ color: "#676667" }}>
                     All Chats
                   </Typography>
-                  {ChatList.filter((el) => !el.pinned).map((el) => {
-                    return <ChatElement {...el} />;
-                  })}
+                  {conversations
+                    .filter((el) => !el.pinned)
+                    .map((el) => {
+                      return <ChatElement {...el} />;
+                    })}
                 </Stack>
               </SimpleBarStyle>
             </Stack>
