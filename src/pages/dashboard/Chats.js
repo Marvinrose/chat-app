@@ -23,7 +23,8 @@ import {
 import ChatElement from "../../components/ChatElement";
 import Friends from "../../sections/main/Friends";
 import { socket } from "../../socket";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchDirectConversations } from "../../redux/slices/conversation";
 
 // const StyledBadge = styled(Badge)(({ theme }) => ({
 //   "& .MuiBadge-badge": {
@@ -56,6 +57,7 @@ import { useSelector } from "react-redux";
 
 const Chats = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
 
   const user_id = window.localStorage.getItem("user_id");
@@ -66,7 +68,11 @@ const Chats = () => {
 
   useEffect(() => {
     socket.emit("get_direct_conversations", { user_id }, (data) => {
-      //  data => list of conversations
+      //  data => This data is the list of conversations
+
+      // dispatch action
+
+      dispatch(FetchDirectConversations({ conversations: data }));
     });
   }, []);
 
@@ -148,7 +154,7 @@ const Chats = () => {
                   </Typography>
                   {conversations
                     .filter((el) => !el.pinned)
-                    .map((el) => {
+                    .map((el, idx) => {
                       return <ChatElement {...el} />;
                     })}
                 </Stack>

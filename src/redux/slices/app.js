@@ -1,17 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "../../utils/axios";
 
 const initialState = {
+  user: {},
   sidebar: {
     open: false,
     type: "CONTACT", // Can be CONTACT, STARRED, SHARED
   },
+  isLoggedIn: true,
+  tab: 0, // [0, 1, 2, 3]
   snackbar: {
     open: null,
     message: null,
     severity: null,
   },
   users: [],
+  all_users: [],
   friends: [],
   friendRequests: [],
   chat_type: null,
@@ -22,6 +26,12 @@ const slice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    fetchUser(state, action) {
+      state.user = action.payload.user;
+    },
+    updateUser(state, action) {
+      state.user = action.payload.user;
+    },
     // toggle sidebar
     toggleSidebar(state, action) {
       state.sidebar.open = !state.sidebar.open;
@@ -41,6 +51,9 @@ const slice = createSlice({
     },
     updateUsers(state, action) {
       state.users = action.payload.users;
+    },
+    updateAllUsers(state, action) {
+      state.all_users = action.payload.users;
     },
     updateFriends(state, action) {
       state.friends = action.payload.friends;
@@ -75,6 +88,12 @@ export function UpdateSidebarType(type) {
   };
 }
 
+export function UpdateTab(tab) {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.updateTab(tab));
+  };
+}
+
 export const showSnackbar =
   ({ severity, message }) =>
   async (dispatch, getState) => {
@@ -94,7 +113,7 @@ export const closeSnackbar = () => async (dispatch, getState) => {
   dispatch(slice.actions.closeSnackbar());
 };
 
-export const FetchUsers = () => async (dispatch, getState) => {
+export function FetchUsers() {
   return async (dispatch, getState) => {
     await axios
       .get("/user/get-users", {
@@ -106,14 +125,38 @@ export const FetchUsers = () => async (dispatch, getState) => {
       .then((response) => {
         console.log(response);
         dispatch(slice.actions.updateUsers({ users: response.data.data }));
+        console.log("Users State:", getState().app.users); // Log the users state
       })
       .catch((error) => {
         console.log(error);
       });
   };
-};
+}
 
-export const FetchFriends = () => async (dispatch, getState) => {
+export function FetchAllUsers() {
+  return async (dispatch, getState) => {
+    await axios
+      .get(
+        "/user/get-all-verified-users",
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getState().auth.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch(slice.actions.updateAllUsers({ users: response.data.data }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+
+export function FetchFriends() {
   return async (dispatch, getState) => {
     await axios
       .get("/user/get-friends", {
@@ -130,9 +173,9 @@ export const FetchFriends = () => async (dispatch, getState) => {
         console.log(error);
       });
   };
-};
+}
 
-export const FetchFriendRequest = () => async (dispatch, getState) => {
+export function FetchFriendRequests() {
   return async (dispatch, getState) => {
     await axios
       .get("/user/get-requests", {
@@ -151,10 +194,10 @@ export const FetchFriendRequest = () => async (dispatch, getState) => {
         console.log(error);
       });
   };
-};
+}
 
 export const SelectConversation = ({ room_id }) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(slice.actions.selectConversation({ room_id }));
   };
 };
