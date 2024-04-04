@@ -3,15 +3,15 @@ import {
   Box,
   Divider,
   IconButton,
-  Link,
   Menu,
   MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import { Message_options } from "../../data";
+import Embed from "react-embed";
 
 const DocMsg = ({ el }) => {
   const theme = useTheme();
@@ -60,12 +60,13 @@ const DocMsg = ({ el }) => {
 const LinkMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
-    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
+    <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
       <Box
-        p={1.5}
+        px={1.5}
+        py={1.5}
         sx={{
           backgroundColor: el.incoming
-            ? theme.palette.background.default
+            ? alpha(theme.palette.background.default, 1)
             : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
@@ -74,36 +75,28 @@ const LinkMsg = ({ el, menu }) => {
         <Stack spacing={2}>
           <Stack
             p={2}
+            direction="column"
             spacing={3}
-            alignItems={"center"}
+            alignItems="start"
             sx={{
               backgroundColor: theme.palette.background.paper,
               borderRadius: 1,
             }}
           >
-            <img
-              src={el.preview}
-              alt={el.message}
-              style={{ borderRadius: "10px", maxHeight: 210 }}
-            />
-            <Stack spacing={2}>
-              <Typography variant="subtitle2">Creating Chat App</Typography>
-              <Typography
-                variant="subtitle2"
-                component={Link}
-                to="//https://www.youtube.com"
-                sx={{ color: theme.palette.primary.main }}
-              >
-                www.rozzeymarvin.com
-              </Typography>
+            <Stack direction={"column"} spacing={2}>
+              <Embed
+                width="300px"
+                isDark
+                url={`https://youtu.be/xoWxBR34qLE`}
+              />
             </Stack>
-            <Typography
-              variant="body2"
-              color={el.incoming ? theme.palette.text : "#fff"}
-            >
-              {el.message}
-            </Typography>
           </Stack>
+          <Typography
+            variant="body2"
+            color={el.incoming ? theme.palette.text : "#fff"}
+          >
+            <div dangerouslySetInnerHTML={{ __html: el.message }}></div>
+          </Typography>
         </Stack>
       </Box>
       {menu && <MsgOptions />}
