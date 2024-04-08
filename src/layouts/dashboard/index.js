@@ -23,7 +23,13 @@ import {
   UpdateAudioCallDialog,
 } from "../../redux/slices/audioCall";
 import AudioCallNotification from "../../sections/dashboard/Audio/CallNotification";
+import VideoCallNotification from "../../sections/dashboard/Video/CallNotification";
 import AudioCallDialog from "../../sections/dashboard/Audio/CallDialog";
+import VideoCallDialog from "../../sections/dashboard/Video/CallDialog";
+import {
+  PushToVideoCallQueue,
+  UpdateVideoCallDialog,
+} from "../../redux/slices/videoCall";
 
 const DashboardLayout = () => {
   const isDesktop = useResponsive("up", "md");
@@ -41,12 +47,19 @@ const DashboardLayout = () => {
     (state) => state.audioCall
   );
 
+  const { open_video_notification_dialog, open_video_dialog } = useSelector(
+    (state) => state.videoCall
+  );
+
   useEffect(() => {
     dispatch(FetchUserProfile());
   }, []);
 
   const handleCloseAudioDialog = () => {
     dispatch(UpdateAudioCallDialog({ state: false }));
+  };
+  const handleCloseVideoDialog = () => {
+    dispatch(UpdateVideoCallDialog({ state: false }));
   };
 
   useEffect(() => {
@@ -67,6 +80,11 @@ const DashboardLayout = () => {
       socket.on("audio_call_notification", (data) => {
         // TODO => dispatch an action to add this in call_queue
         dispatch(PushToAudioCallQueue(data));
+      });
+
+      socket.on("video_call_notification", (data) => {
+        // TODO => dispatch an action to add this in call_queue
+        dispatch(PushToVideoCallQueue(data));
       });
 
       //  new friend request
@@ -151,6 +169,15 @@ const DashboardLayout = () => {
         <AudioCallDialog
           open={open_audio_dialog}
           handleClose={handleCloseAudioDialog}
+        />
+      )}
+      {open_video_notification_dialog && (
+        <VideoCallNotification open={open_video_notification_dialog} />
+      )}
+      {open_video_dialog && (
+        <VideoCallDialog
+          open={open_video_dialog}
+          handleClose={handleCloseVideoDialog}
         />
       )}
     </>

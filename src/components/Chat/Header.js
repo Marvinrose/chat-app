@@ -19,6 +19,7 @@ import useResponsive from "../../hooks/useResponsive";
 import { ToggleSidebar } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
 import { StartAudioCall } from "../../redux/slices/audioCall";
+import { StartVideoCall } from "../../redux/slices/videoCall";
 // import { StartAudioCall } from "../../redux/slices/audioCall";
 // import { StartVideoCall } from "../../redux/slices/videoCall";
 
@@ -139,9 +140,9 @@ const ChatHeader = () => {
             spacing={isMobile ? 1 : 3}
           >
             <IconButton
-              // onClick={() => {
-              //   dispatch(StartVideoCall(current_conversation.user_id));
-              // }}
+              onClick={() => {
+                dispatch(StartVideoCall(current_conversation.user_id));
+              }}
             >
               <VideoCamera />
             </IconButton>
