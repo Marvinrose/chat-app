@@ -18,6 +18,7 @@ import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
 import useResponsive from "../../hooks/useResponsive";
 import { ToggleSidebar } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
+import { StartAudioCall } from "../../redux/slices/audioCall";
 // import { StartAudioCall } from "../../redux/slices/audioCall";
 // import { StartVideoCall } from "../../redux/slices/videoCall";
 
@@ -145,9 +146,9 @@ const ChatHeader = () => {
               <VideoCamera />
             </IconButton>
             <IconButton
-              // onClick={() => {
-              //   dispatch(StartAudioCall(current_conversation.user_id));
-              // }}
+              onClick={() => {
+                dispatch(StartAudioCall(current_conversation.user_id));
+              }}
             >
               <Phone />
             </IconButton>

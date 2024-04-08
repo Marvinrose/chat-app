@@ -3,6 +3,7 @@ import appReducer from "./slices/app";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/auth";
 import conversationReducer from "./slices/conversation";
+import audioCallReducer from "./slices/audioCall";
 
 // Slices
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
   conversation: conversationReducer,
+  audioCall: audioCallReducer,
 });
 
 export { rootPersistConfig, rootReducer };

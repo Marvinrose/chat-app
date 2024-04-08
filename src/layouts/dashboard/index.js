@@ -7,13 +7,23 @@ import { Navigate, Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { connectSocket, socket } from "../../socket";
-import { SelectConversation, showSnackbar } from "../../redux/slices/app";
+import {
+  FetchUserProfile,
+  SelectConversation,
+  showSnackbar,
+} from "../../redux/slices/app";
 import {
   AddDirectConversation,
   AddDirectMessage,
   UpdateDirectConversation,
 } from "../../redux/slices/conversation";
 import useResponsive from "../../hooks/useResponsive";
+import {
+  PushToAudioCallQueue,
+  UpdateAudioCallDialog,
+} from "../../redux/slices/audioCall";
+import AudioCallNotification from "../../sections/dashboard/Audio/CallNotification";
+import AudioCallDialog from "../../sections/dashboard/Audio/CallDialog";
 
 const DashboardLayout = () => {
   const isDesktop = useResponsive("up", "md");
@@ -26,6 +36,18 @@ const DashboardLayout = () => {
   // const { user_id } = useSelector((state) => state.auth);
 
   const user_id = window.localStorage.getItem("user_id");
+
+  const { open_audio_notification_dialog, open_audio_dialog } = useSelector(
+    (state) => state.audioCall
+  );
+
+  useEffect(() => {
+    dispatch(FetchUserProfile());
+  }, []);
+
+  const handleCloseAudioDialog = () => {
+    dispatch(UpdateAudioCallDialog({ state: false }));
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -41,6 +63,11 @@ const DashboardLayout = () => {
       if (!socket) {
         connectSocket(user_id);
       }
+
+      socket.on("audio_call_notification", (data) => {
+        // TODO => dispatch an action to add this in call_queue
+        dispatch(PushToAudioCallQueue(data));
+      });
 
       //  new friend request
 
@@ -97,6 +124,7 @@ const DashboardLayout = () => {
       socket?.off("request_sent");
       socket?.off("start_chat");
       socket?.off("new_message");
+      socket?.off("audio_call_notification");
     };
   }, [isLoggedIn, socket]);
 
@@ -116,6 +144,15 @@ const DashboardLayout = () => {
         )}
         <Outlet />
       </Stack>
+      {open_audio_notification_dialog && (
+        <AudioCallNotification open={open_audio_notification_dialog} />
+      )}
+      {open_audio_dialog && (
+        <AudioCallDialog
+          open={open_audio_dialog}
+          handleClose={handleCloseAudioDialog}
+        />
+      )}
     </>
   );
 };
