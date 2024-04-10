@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Chats from "./Chats";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 // import Conversation from "../../components/conversation";
 import Contact from "../../components/Contact";
@@ -8,15 +8,27 @@ import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages";
 import StarredMessages from "../../components/StarredMessages";
 import NoChatSvg from "../../assets/Illustration/NoChat";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import ChatComponent from "../../components/conversation/Message";
+import Friends from "../../sections/main/Friends";
 
 const GeneralApp = () => {
   const [searchParams] = useSearchParams();
   const theme = useTheme();
 
+  const [openDialog, setOpenDialog] = useState(false);
+
   const { sidebar, chat_type, room_id } = useSelector((store) => store.app);
   // console.log(sidebar, "sidebarrr");
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
   return (
     <>
       <Stack direction={"row"}>
@@ -51,8 +63,15 @@ const GeneralApp = () => {
             >
               <NoChatSvg />
               <Typography variant="subtitle2">
-                Select a conversation or start a {" "}
-                <Link
+                Select a conversation or start a{" "}
+                <Button
+                  onClick={() => {
+                    handleOpenDialog();
+                  }}
+                >
+                  New One
+                </Button>
+                {/* <Link
                   style={{
                     color: theme.palette.primary.main,
                     textDecoration: "none",
@@ -60,7 +79,7 @@ const GeneralApp = () => {
                   to="/"
                 >
                   new one
-                </Link>
+                </Link> */}
               </Typography>
             </Stack>
           )}
@@ -84,6 +103,9 @@ const GeneralApp = () => {
             }
           })()}
       </Stack>
+      {openDialog && (
+        <Friends open={openDialog} handleClose={handleCloseDialog} />
+      )}
     </>
   );
 };
