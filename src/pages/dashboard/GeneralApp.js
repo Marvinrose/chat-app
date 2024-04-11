@@ -63,7 +63,7 @@ const GeneralApp = () => {
             >
               <NoChatSvg />
               <Typography variant="subtitle2">
-                Select a conversation or start a{" "}
+                Select a conversation or start a
                 <Button
                   onClick={() => {
                     handleOpenDialog();
